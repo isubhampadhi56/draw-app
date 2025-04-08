@@ -1,0 +1,27 @@
+{
+  "name": "@repo/database-service",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Database service",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "vitest",
+    "coverage": "vitest run --coverage"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "typeorm": "^0.3.22"
+  },
+  "devDependencies": {
+    "@vitest/coverage-v8": "^1.0.0",
+    "typescript": "^5.0.0",
+    "vitest": "^1.0.0"
+  }
+}
