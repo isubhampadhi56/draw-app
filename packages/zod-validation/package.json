@@ -5,7 +5,8 @@
   "license": "MIT",
   "description": "zod validation schemas",
   "exports": {
-    "./auth": "./src/auth.validator.ts"
+    "./auth": "./src/auth.validator.ts",
+    "./room": "./src/room.validator.ts"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

@@ -1,9 +1,11 @@
 import { SqliteConnectionOptions } from "typeorm/driver/sqlite/SqliteConnectionOptions.js";
 import { User } from "./entities/users.entity";
 import { DataSource } from "typeorm";
+import { Room } from "./entities/room.entity";
 
 const drawEntities = [
-    User
+    User,
+    Room
 ]
 const sqlitedbConnectionOption: SqliteConnectionOptions = {
     type: "sqlite",
@@ -39,4 +41,5 @@ export async function disconnectDB(){
     }
 }
 
-export const userRepo = drawAppDataSource.getRepository(User)
+export const userRepo = drawAppDataSource.getRepository(User);
+export const roomRepo = drawAppDataSource.getRepository(Room);
