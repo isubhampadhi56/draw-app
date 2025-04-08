@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from "./users.entity";
 import { Chat } from "./chat.entity";
 @Entity()
@@ -20,6 +20,9 @@ export class Room {
 
     @Column({nullable:true})
     password?: string;
+
+    @CreateDateColumn()
+    createdAt!: Date 
 
     @ManyToOne(() => User, (user) => user.rooms)
     owner?: User;

@@ -12,7 +12,7 @@ authRouter.post("/signin", async (req, res, next) => {
     }
 });
 
-authRouter.post("signup", async (req, res,next) => {
+authRouter.post("/signup", async (req, res,next) => {
     try{
         const result = await signup(req.body);
         res.json(result);

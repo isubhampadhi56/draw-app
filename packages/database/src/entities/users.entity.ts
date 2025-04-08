@@ -11,15 +11,15 @@ export class User{
     firstName!: string
 
     @Column()
-    lastname?: string
+    lastName?: string
 
-    @Column()
+    @Column({unique:true})
     username!: string
 
     @Column()
     password!: string
 
-    @Column()
+    @Column({unique:true})
     email!: string
 
     @Column()

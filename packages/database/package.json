@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@repo/typescript-config": "workspace:*",
-    "sqlite": "^5.1.1",
+    "sqlite3": "^5.1.7",
     "typeorm": "^0.3.22"
   }
 }
