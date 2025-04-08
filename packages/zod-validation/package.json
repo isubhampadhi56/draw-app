@@ -1,0 +1,24 @@
+{
+  "name": "@repo/zod-validation",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "description": "zod validation schemas",
+  "exports": {
+    "./auth": "./src/auth.validator.ts"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+    "scripts": {
+    "build": "tsc"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@repo/typescript-config": "workspace:*",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+  }
+}

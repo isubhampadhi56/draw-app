@@ -11,7 +11,8 @@
   "dependencies": {
     "express": "^5.1.0",
     "zod": "^3.24.2",
-    "@repo/jwt-service":"workspace:*"
+    "@repo/jwt-service":"workspace:*",
+    "@repo/zod-validation":"workspace:*"
   },
   "devDependencies": {
     "@repo/typescript-config": "workspace:*",

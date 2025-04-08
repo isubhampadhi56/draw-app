@@ -23,6 +23,9 @@ importers:
       '@repo/jwt-service':
         specifier: workspace:*
         version: link:../../packages/jwt-service
+      '@repo/zod-validation':
+        specifier: workspace:*
+        version: link:../../packages/zod-validation
       express:
         specifier: ^5.1.0
         version: 5.1.0
@@ -191,6 +194,15 @@ importers:
       typescript:
         specifier: 5.8.2
         version: 5.8.2
+
+  packages/zod-validation:
+    dependencies:
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      zod:
+        specifier: ^3.24.2
+        version: 3.24.2
 
 packages:
 

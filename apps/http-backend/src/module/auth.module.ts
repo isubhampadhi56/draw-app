@@ -1,9 +1,8 @@
-import { Request } from "express";
-import { loginValidator, registerValidator } from "../validation/auth.validator";
+import { loginValidator, registerValidator } from "@repo/zod-validation/auth";
 import { JwtBody,JwtService } from "@repo/jwt-service";
 
 export async function signin(signInData: any) {
-    // const data = await loginValidator.parseAsync(signInData);
+    const data = await loginValidator.parseAsync(signInData);
     const jwtPayload: JwtBody = {
         userId: "1",
         username: "demo",
