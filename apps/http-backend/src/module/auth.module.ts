@@ -1,6 +1,6 @@
 import { Request } from "express";
 import { loginValidator, registerValidator } from "../validation/auth.validator";
-import { JwtBody,JwtService } from "@repo/jwt-service/src";
+import { JwtBody,JwtService } from "@repo/jwt-service";
 
 export async function signin(signInData: any) {
     // const data = await loginValidator.parseAsync(signInData);

@@ -4,13 +4,11 @@
   "private": true,
   "license": "MIT",
   "description": "JWT token generation and validation service",
+  "exports": "./src/index.ts",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "dev": "tsc --watch",
-    "test": "vitest",
-    "coverage": "vitest run --coverage"
+    "scripts": {
+    "build": "tsc"
   },
   "publishConfig": {
     "access": "public"
@@ -21,8 +19,5 @@
     "jsonwebtoken": "^9.0.2"
   },
   "devDependencies": {
-    "typescript": "^5.0.0",
-    "vitest": "^1.0.0",
-    "@vitest/coverage-v8": "^1.0.0"
   }
 }
