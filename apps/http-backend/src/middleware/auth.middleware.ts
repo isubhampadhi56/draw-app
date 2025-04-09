@@ -1,9 +1,6 @@
 import {JwtService} from "@repo/jwt-service";
 import { NextFunction, Request, Response } from "express";
 
-const jwtObj = new JwtService(String(process.env.JWT_SECRET),60*60*24);
-JwtService.getInstance()
-
 
 export const authMiddleware = async (req: Request, res:Response, next: NextFunction) => {
     try{

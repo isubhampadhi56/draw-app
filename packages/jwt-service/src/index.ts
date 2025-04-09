@@ -11,14 +11,17 @@ export class JwtService {
     private static instance: JwtService;
     private jwtSecret: string;
     private expiresIn: number;
-    constructor(jwtSecret: string, expiresIn: number) {
+    private constructor(jwtSecret: string, expiresIn: number) {
         this.jwtSecret = jwtSecret;
         this.expiresIn = expiresIn;
         JwtService.instance = this;
     }
     public static getInstance(): JwtService {
         if (!JwtService.instance) {
-            throw new Error('JwtService is not initialized');
+            JwtService.instance = new JwtService(
+                String(process.env.JWT_SECRET || "sup3rs3cr3t"),
+                60 * 60 * 24
+            )
         }
         return JwtService.instance;
     }
