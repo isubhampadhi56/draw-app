@@ -74,7 +74,7 @@ export async function signup(signUpData: any) {
 
     });
     return{
-        userId: user.raw,
+        userId: user.identifiers[0]?.id,
         username: data.username,
         email: data.email,
     };
