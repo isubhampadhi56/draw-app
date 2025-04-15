@@ -1,20 +1,10 @@
  import { WebSocketServer,WebSocket } from "ws";
  import {JwtBody, JwtService} from "@repo/jwt-service";
-import { json } from "express";
+import { roomUsersMapping, userRoomsMapping, userSocketMapping } from "./types";
+import { informRoomUsers, joinRoom, leaveRoom } from "./module/room.module";
  const wss = new WebSocketServer({port: 8080});
  console.log("starting websocket server on 8080")
- interface User{
-     id: string,
-     rooms: string[],
-     ws: WebSocket
- }
- interface Room{
-     id: string,
-     users: User[]
-
- }
- const users:User[] = [];
- const rooms:Room[] = [];
+ 
 
  wss.on('connection', async (ws,request) => {
     const url = request.url;
@@ -36,42 +26,34 @@ import { json } from "express";
         ws.close();
         return;
     }
-    users.push(
-        {
-            id: userData.userId,
-            rooms: [],
-            ws
-        }
-    )
+    userSocketMapping.set(userData.userId,ws);
     
      ws.on('message', function message(data) {
         const parsedMessage = JSON.parse(data as unknown as string);
         console.log(parsedMessage);
         if(parsedMessage.type === "join-room"){
-            users.forEach((user) => {
-                if(user.id === userData?.userId){
-                    user.rooms.push(parsedMessage.roomId);
-                }
-            })
+            joinRoom(userData,parsedMessage);
+            informRoomUsers(parsedMessage.roomId,userData);
         }
         if(parsedMessage.type === "leave-room"){
-            const user = users.find((user) => user.ws === ws);
-            if(!user){
-                return;
-            }
-            user.rooms = user.rooms.filter((roomId) => roomId !== parsedMessage.roomId); 
+            leaveRoom(userData,parsedMessage);
         }
         if(parsedMessage.type === "chat"){
-            users.forEach((user) => {
-                if(user.rooms.includes(parsedMessage.roomId)){
-                    user.ws.send(JSON.stringify({
-                        userId: userData.userId,
-                        userData: userData.username,
-                        type: "chat",
-                        roomId: parsedMessage.roomId,
-                        message: parsedMessage.message
-                    }));
-            }})
+            const messageData = {
+                userId: userData.userId,
+                username: userData.username,
+                type: "chat",
+                roomId: parsedMessage.roomId,
+                message: parsedMessage.message,
+                timestamp: new Date()
+            };
+            console.log(userRoomsMapping);
+            console.log(roomUsersMapping);
+            roomUsersMapping.get(parsedMessage.roomId)?.forEach((userId) => {
+                if(userId !== userData.userId){
+                    userSocketMapping.get(userId)?.send(JSON.stringify(messageData));
+                }
+            })
         }
      })
  })
