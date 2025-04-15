@@ -1,7 +1,7 @@
  import { WebSocketServer,WebSocket } from "ws";
  import {JwtBody, JwtService} from "@repo/jwt-service";
 import { roomUsersMapping, userRoomsMapping, userSocketMapping } from "./types";
-import { informRoomUsers, joinRoom, leaveRoom } from "./module/room.module";
+import { hasJoinedRoom, informRoomUsers, joinRoom, leaveRoom, sendMessage } from "./module/room.module";
  const wss = new WebSocketServer({port: 8080});
  console.log("starting websocket server on 8080")
  
@@ -47,13 +47,9 @@ import { informRoomUsers, joinRoom, leaveRoom } from "./module/room.module";
                 message: parsedMessage.message,
                 timestamp: new Date()
             };
-            console.log(userRoomsMapping);
-            console.log(roomUsersMapping);
-            roomUsersMapping.get(parsedMessage.roomId)?.forEach((userId) => {
-                if(userId !== userData.userId){
-                    userSocketMapping.get(userId)?.send(JSON.stringify(messageData));
-                }
-            })
+            if(hasJoinedRoom(userData,parsedMessage.roomId)){
+                sendMessage(parsedMessage.roomId,userData,messageData);
+            }
         }
      })
  })
